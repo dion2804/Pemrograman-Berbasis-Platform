@@ -6,88 +6,26 @@
     <title>Form Pilihan</title>
 </head>
 <body>
-    <div id="step1">
+    <form action="#" method="GET">
         <label for="nama">Nama:</label>
-        <input type="text" id="nama" required>
+        <input type="text" id="nama" name="nama" required>
         <br>
-        <label for="jumlah">Jumlah Pilihan:</label>
-        <input type="number" id="jumlah" min="1" required>
+        <label>Masukkan Pilihan:</label>
         <br>
-        <button onclick="generateInputs()">OK</button>
-    </div>
-
-    <div id="step2" style="display: none;">
-        <form id="choicesForm">
-            <div id="choices"></div>
-            <button type="button" onclick="generateSelection()">Submit</button>
-        </form>
-    </div>
-
-    <div id="step3" style="display: none;">
+        <input type="text" name="pilihan1" required placeholder="Pilihan 1">
+        <br>
+        <input type="text" name="pilihan2" required placeholder="Pilihan 2">
+        <br>
+        <input type="text" name="pilihan3" required placeholder="Pilihan 3">
+        <br>
         <label for="selection">Pilih salah satu:</label>
-        <select id="selection"></select>
+        <select id="selection" name="selection" required>
+            <option value="pilihan1">Pilihan 1</option>
+            <option value="pilihan2">Pilihan 2</option>
+            <option value="pilihan3">Pilihan 3</option>
+        </select>
         <br>
-        <button onclick="showResult()">Submit</button>
-    </div>
-
-    <div id="result" style="display: none;"></div>
-
-    <script>
-        let choicesArray = [];
-
-        function generateInputs() {
-            let jumlah = document.getElementById("jumlah").value;
-            if (jumlah <= 0) return;
-            
-            let choicesDiv = document.getElementById("choices");
-            choicesDiv.innerHTML = "";
-            
-            for (let i = 0; i < jumlah; i++) {
-                let input = document.createElement("input");
-                input.type = "text";
-                input.placeholder = `Teks Pilihan ${i + 1}`;
-                input.required = true;
-                choicesDiv.appendChild(input);
-                choicesDiv.appendChild(document.createElement("br"));
-            }
-            
-            document.getElementById("step1").style.display = "none";
-            document.getElementById("step2").style.display = "block";
-        }
-
-        function generateSelection() {
-            let inputs = document.querySelectorAll("#choices input");
-            choicesArray = [];
-            
-            for (let input of inputs) {
-                if (input.value.trim() === "") return;
-                choicesArray.push(input.value.trim());
-            }
-            
-            let selection = document.getElementById("selection");
-            selection.innerHTML = "";
-            
-            choicesArray.forEach(choice => {
-                let option = document.createElement("option");
-                option.value = choice;
-                option.textContent = choice;
-                selection.appendChild(option);
-            });
-            
-            document.getElementById("step2").style.display = "none";
-            document.getElementById("step3").style.display = "block";
-        }
-
-        function showResult() {
-            let nama = document.getElementById("nama").value;
-            let jumlah = document.getElementById("jumlah").value;
-            let pilihanTerpilih = document.getElementById("selection").value;
-            
-            let resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = `Hallo, nama saya ${nama}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${choicesArray.join(", ")}, dan saya memilih ${pilihanTerpilih}.`;
-            resultDiv.style.display = "block";
-            document.getElementById("step3").style.display = "none";
-        }
-    </script>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
